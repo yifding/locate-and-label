@@ -1,6 +1,5 @@
 __pycache__
 *.json
-*.txt
 *.jsonl
 *.npy
 *.pt
@@ -8,6 +7,7 @@ __pycache__
 *.train
 *.dev
 *.test
-RUN_FILES
+# RUN_FILES
 yd_data
-
+log
+main
