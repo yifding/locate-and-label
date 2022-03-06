@@ -14,7 +14,7 @@ def process_configs(target, arg_parser):
     ctx = mp.get_context('spawn')
 
     subprocess=[]
-    all_gpu_queue=[0, 1, 2, 3]
+    all_gpu_queue=[1]
     gpu_queue = []
     waittime = 120
     for run_args, _run_config, _run_repeat in _yield_configs(arg_parser, args):

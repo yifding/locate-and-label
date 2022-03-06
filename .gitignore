@@ -1,0 +1,13 @@
+__pycache__
+*.json
+*.txt
+*.jsonl
+*.npy
+*.pt
+.DS_Store
+*.train
+*.dev
+*.test
+RUN_FILES
+yd_data
+

@@ -168,17 +168,20 @@ class IdentifierTrainer(BaseTrainer):
             self._train_epoch(model, compute_loss, optimizer, train_dataset, updates_epoch, epoch)
 
             # eval validation sets
-            if not args.final_eval or (epoch == args.epochs - 1):
-                f1 = self._eval(model, validation_dataset, input_reader, epoch + 1, updates_epoch)
-                if best_f1 < f1[2]:
-                    print(f"Best F1 score update, from {best_f1} to {f1[2]}")
-                    best_f1 = f1[2]
-                    best_epoch = epoch + 1
-                    extra = dict(epoch=epoch, updates_epoch=updates_epoch, epoch_iteration=0)
-                    self._save_model(self._save_path, model, self._tokenizer, epoch * updates_epoch,
-                         optimizer=optimizer if self.args.save_optimizer else None, extra=extra,
-                         include_iteration=False, name='best_model')
-            print(f"Best F1 score: {best_f1}, achieved at Epoch: {best_epoch}")
+            # if not args.final_eval or (epoch == args.epochs - 1):
+            #     f1 = self._eval(model, validation_dataset, input_reader, epoch + 1, updates_epoch)
+            #     if best_f1 < f1[2]:
+            #         print(f"Best F1 score update, from {best_f1} to {f1[2]}")
+            #         best_f1 = f1[2]
+            #         best_epoch = epoch + 1
+            #         extra = dict(epoch=epoch, updates_epoch=updates_epoch, epoch_iteration=0)
+            # self._save_model(self._save_path, model, self._tokenizer, epoch * updates_epoch,
+            #      optimizer=optimizer if self.args.save_optimizer else None, extra=extra,
+            #      include_iteration=False, name='best_model')
+            # print(f"Best F1 score: {best_f1}, achieved at Epoch: {best_epoch}")
+            self._save_model(self._save_path, model, self._tokenizer, epoch * updates_epoch,
+                 optimizer=optimizer if self.args.save_optimizer else None,
+                 include_iteration=False, name=f'epoch-{epoch+1}')
 
         # save final model
         extra = dict(epoch=args.epochs, updates_epoch=updates_epoch, epoch_iteration=0)
