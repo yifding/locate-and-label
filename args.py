@@ -121,8 +121,10 @@ def train_argparser():
 def eval_argparser():
     arg_parser = argparse.ArgumentParser()
 
-    # Input
-    arg_parser.add_argument('--dataset_path', type=str, help="Path to dataset")
+    # **YD** add extra arguments for testing files.
+    arg_parser.add_argument('--yd_test_dir', type=str, help="Path to test dataset")
+    arg_parser.add_argument('--yd_test_att_list', type=eval, help="Path to test dataset")
+    arg_parser.add_argument('--yd_output_dir', type=str, help="Path to dataset")
 
     _add_common_args(arg_parser)
 

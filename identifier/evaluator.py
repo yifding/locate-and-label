@@ -134,10 +134,14 @@ class Evaluator:
 
         # store as json
         label, epoch = self._dataset_label, self._epoch
-        with open(self._predictions_path % (label, epoch), 'w') as predictions_file:
+
+        #**YD** only stores prediction file
+        with open(self._predictions_path, 'w') as predictions_file:
             json.dump(predictions, predictions_file)
-        with open(self._predictions_path % ("valid_all", epoch), 'w') as predictions_file:
-            json.dump(self._raw_preds, predictions_file)
+        # with open(self._predictions_path % (label, epoch), 'w') as predictions_file:
+        #     json.dump(predictions, predictions_file)
+        # with open(self._predictions_path % ("valid_all", epoch), 'w') as predictions_file:
+        #     json.dump(self._raw_preds, predictions_file)
 
         # 
         raw_preds_match_gt = []
@@ -150,8 +154,8 @@ class Evaluator:
                     return False
             pre_match_gt = list(filter(is_match, pre))
             raw_preds_match_gt.append(pre_match_gt)
-        with open(self._predictions_path % ("valid_all_match_gt", epoch), 'w') as predictions_file:
-            json.dump(raw_preds_match_gt, predictions_file)
+        # with open(self._predictions_path % ("valid_all_match_gt", epoch), 'w') as predictions_file:
+        #     json.dump(raw_preds_match_gt, predictions_file)
 
         
 
@@ -540,11 +544,14 @@ class Evaluator:
         return text
 
     def _store_examples(self, examples: List[Dict], file_path: str, template: str):
-        template_path = os.path.join(SCRIPT_PATH, 'templates', template)
+        # **YD** ignore all the store_examples
+        pass
 
-        # read template
-        with open(os.path.join(SCRIPT_PATH, template_path)) as f:
-            template = jinja2.Template(f.read())
-
-        # write to disc
-        template.stream(examples=examples).dump(file_path)
+        # template_path = os.path.join(SCRIPT_PATH, 'templates', template)
+        #
+        # # read template
+        # with open(os.path.join(SCRIPT_PATH, template_path)) as f:
+        #     template = jinja2.Template(f.read())
+        #
+        # # write to disc
+        # template.stream(examples=examples).dump(file_path)
